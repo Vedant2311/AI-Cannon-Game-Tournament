@@ -201,7 +201,7 @@ function by trying out different parameters for an eval function or taking two d
   7. Orientation Advantage: This factor was introduced for making the player form more meaningful cannons as per the configuration of the game. Different weights were assigned to the different types of cannons, like Horizontal or Vertical etc., and they were added up. Also, these weights weren’t constant and they would change along with the configuration of the game as a function of the End_Game_Factor. Thus giving some cannons more preference over others as the game proceeds. Also, for the 8 * 8 configuration, as a correction for the aggressive approach developed, we gave a fixed priority to certain kinds of horizontal cannons being formed so that they can act as a nice defense and try to prevent the other soldiers or cannons from killing its town halls straightaway. This factor was multiplied with the Middle_Game_Factor, for facilitating the cannon formation in the middle game and making the game aggressive in the start game and end game
 
 * Thus, the eval function can be defined as
-    `Eval = (1) + ((2)_ratio + (3))*(6)*(5) + (2)_diff + (4)*(7)`
+              `Eval = (1) + ((2)_ratio + (3))*(6)*(5) + (2)_diff + (4)*(7)`
   
 
 
