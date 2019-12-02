@@ -171,3 +171,10 @@ Player 1 killed 2 Town Halls and has 12 soldiers left on the board.
 Player 2 killed 1 Town Hall and has 9 soldiers left on the board.  
 Player 1 score will be: **8.12**  
 Player 2 score will be: **2.09**  
+
+### General Approach for the player bot
+
+* The player Bot is A5.cpp
+* We applied a general Mini-max algorithm with an initial depth assigned as:
+    * 5 for 8*8 board
+    * 4 for other configurations
