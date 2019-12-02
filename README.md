@@ -178,3 +178,10 @@ Player 2 score will be: **2.09**
 * We applied a general Mini-max algorithm with an initial depth assigned as:
     * 5 for 8*8 board
     * 4 for other configurations
+* Then, we had the search depth being changed along with the game as the game proceeds. We took an
+approximation that the progress of the game can be represented as a GM of the number of the soldiers
+for the two players left. And the game would be progressed more if this mean is less
+* We also applied alpha-beta pruning. For that, we tried to keep a good node ordering by evaluating the moves in this order:
+    * Cannon_movement > Cannon_attack > Soldier_movement 
+* Also, as an optimization for the alpha-beta procedure to limit the space being utilized, we would do a reverse move after the mini-max calculations for a corresponding node are carried out, so that we don’t save the node corresponding to that move and the initial board configuration is restored on the modified board configuration itself
+* Also, we kept a bound for the time of execution of a move as a minimum of 6 seconds and time_left/15
