@@ -185,3 +185,12 @@ for the two players left. And the game would be progressed more if this mean is 
     * Cannon_movement > Cannon_attack > Soldier_movement 
 * Also, as an optimization for the alpha-beta procedure to limit the space being utilized, we would do a reverse move after the mini-max calculations for a corresponding node are carried out, so that we don’t save the node corresponding to that move and the initial board configuration is restored on the modified board configuration itself
 * Also, we kept a bound for the time of execution of a move as a minimum of 6 seconds and time_left/15
+
+### The Eval function
+
+* Perhaps the most important part of the entire task, we spent a lot of time on improving this
+function by trying out different parameters for an eval function or taking two different eval functions and observing battles between them and trying to look for errors in those implementations or trying to find better parameters (This might seem naïve but it’s worth mentioning since without proper observations it is not possible to obtain a good eval function and also since no deep learning methods were implemented to learn the exact eval function. Also it was essential that these observations were made for all the board configurations as well because the functions set for one board configuration wouldn’t work for the other configuration) 
+* So, in general, we had our eval function having the following considerations: 
+
+  1. dfgfdg
+  2. gffg
