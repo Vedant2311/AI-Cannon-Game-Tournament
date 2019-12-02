@@ -192,5 +192,20 @@ for the two players left. And the game would be progressed more if this mean is 
 function by trying out different parameters for an eval function or taking two different eval functions and observing battles between them and trying to look for errors in those implementations or trying to find better parameters (This might seem naïve but it’s worth mentioning since without proper observations it is not possible to obtain a good eval function and also since no deep learning methods were implemented to learn the exact eval function. Also it was essential that these observations were made for all the board configurations as well because the functions set for one board configuration wouldn’t work for the other configuration) 
 * So, in general, we had our eval function having the following considerations: 
 
-  1. dfgfdg
-  2. gffg
+  1. Town hall scores: For the different cases of stalemates and absolute wins as described above
+  2. Army Margins: For making the player to try to kill the soldiers of the opponent and to try to save their soldiers. Kept as: Soldiers_left/3
+  3. End Game Factor: A function which declines linearly as the game proceeds (As a function of the sum of the number of soldiers left for the two players) 
+  4. Middle Game Factor: A function which would start from 0, increases to a certain point (Decided as the exact mid-game point) and then declines again reaching a low value in the end-game (As a function of the sum of the number of soldiers left for the two players)
+  5. Eight Factor: This was specifically added for the 8 * 8 board configurations. This was to keep a check for the player getting in the two modes: Defensive and Aggressive as per the configuration of the game. (For keeping things simple, it was just done by a binary thresholding rather than taking a  function). Its value of 1 would mean that the player will be aggressive and the value of 0.6 would mean that it should be relatively defensive
+  6. Positional Advantage: This factor was introduced to make the player very aggressive by being defined as the sum of the positions of the soldiers of the players (times some constant C) raised to some power alpha (Between 1 and 2), thus giving a rule that, “The soldiers which are already closer to the area of the opponent player will be more likely to move forward by giving them an advantage for the same”. Multiplied this value by the End_Game_Factor (Plus a variable dependent on the army margins), so that it would ensure all the soldiers to be moving ahead in the end, rather than forming cannons. (It was a heuristic designed by us to make sure that the lone soldiers left for the player will try their best to kill the opponent town-halls) Also, the Eight_Factor was multiplied to reduce the aggression of the player in the states where the player should be playing defensively. The start is surely mean to be aggressive, trying to move its cannons as forward as possible
+  7. Orientation Advantage: This factor was introduced for making the player form more meaningful cannons as per the configuration of the game. Different weights were assigned to the different types of cannons, like Horizontal or Vertical etc., and they were added up. Also, these weights weren’t constant and they would change along with the configuration of the game as a function of the End_Game_Factor. Thus giving some cannons more preference over others as the game proceeds. Also, for the 8 * 8 configuration, as a correction for the aggressive approach developed, we gave a fixed priority to certain kinds of horizontal cannons being formed so that they can act as a nice defense and try to prevent the other soldiers or cannons from killing its town halls straightaway. This factor was multiplied with the Middle_Game_Factor, for facilitating the cannon formation in the middle game and making the game aggressive in the start game and end game
+
+* Thus, the eval function can be defined as
+    Eval = dfgdf
+  
+
+
+
+
+
+
