@@ -1,25 +1,14 @@
 # AI-Cannon-Game-Tournament
 Simulator supporting a user interface for Cannon, an abstract strategy board game.
 
+# 1. Simulation of the game and the rules
+
 ## Details
 This is a course assignment for the graduate-level Artificial Intelligence course taught by [**Prof. Mausam**](http://homes.cs.washington.edu/~mausam).  
 The assignment documentation can be found [here](http://www.cse.iitd.ac.in/~mausam/courses/col333/autumn2019/A5/A5.pdf)
 
-### Teaching Assistants
-+ [Divyanshu Saxena](https://github.com/DivyanshuSaxena)
-+ [Pratyush Maini](https://github.com/pratyush911)
-+ [Shashank Goel](https://github.com/goelShashank007)
-+ [Vipul Rathore](https://github.com/rathorevipul28)
-
-## Rules
+## Rules of the game
 The rules of the original game can be found [here](https://nestorgames.com/rulebooks/CANNON_EN.pdf)
-
-### Piazza discussions:  
-+ The soldier can retreat back if and only if it is adjacent to an enemy soldier.
-+ The soldier can kill an enemy soldier or a townhall in a retreat step.
-+ Cannon shifts along its length cannot capture a soldier or a townhall.
-+ Blank cannon shots are allowed (take care of stagnant game) and are considered valid moves.
-
 
 ### Stalemate
 Case 1: Player A (or B) kills the last soldier of Player B (or A).  
@@ -27,6 +16,12 @@ Case 2: Both Players have soldiers left, but Player B (or A) has no immediate mo
 
 ### Stagnant Game
 If exactly the same board position is repeated thrice after the move of a player then the player is said to have forced a  Stagnant Game.
+
+### Rules for miscellaneous cases:  
++ The soldier can retreat back if and only if it is adjacent to an enemy soldier.
++ The soldier can kill an enemy soldier or a townhall in a retreat step.
++ Cannon shifts along its length cannot capture a soldier or a townhall.
++ Blank cannon shots are allowed (take care of stagnant game) and are considered valid moves.
 
 ## Dependencies
 + Python2.7
@@ -48,7 +43,7 @@ You can check you chrome version following the steps below:
 - Click on the icon in the upper right corner that looks like 3 short bars.
 - Select About Google Chrome to display the version number.
 
-## Main Files
+## Main Files for running the Simulation
 + `game.py` - This has an instance of the game. It can be run locally to hand play a game of Cannon or re-play a recorded game. Should be run in `GUI` mode to make game board visible.
 + `RandomPlayer.py` - This is an implementation of a random bot. It is a good place to start understanding the flow of the game and the various game states.
 + `client.py` - This will encapsulate your process and help it connect to the game server.
@@ -172,8 +167,9 @@ Player 2 killed 1 Town Hall and has 9 soldiers left on the board.
 Player 1 score will be: **8.12**  
 Player 2 score will be: **2.09**  
 
-### General Approach for the player bot
+# 2. Creating an AI based Cannon game player
 
+## General Approach for the player bot
 * The player Bot is A5.cpp
 * We applied a general Mini-max algorithm with an initial depth assigned as:
     * 5 for 8*8 board
@@ -186,12 +182,11 @@ for the two players left. And the game would be progressed more if this mean is 
 * Also, as an optimization for the alpha-beta procedure to limit the space being utilized, we would do a reverse move after the mini-max calculations for a corresponding node are carried out, so that we don’t save the node corresponding to that move and the initial board configuration is restored on the modified board configuration itself
 * Also, we kept a bound for the time of execution of a move as a minimum of 6 seconds and time_left/15
 
-### The Eval function
-
+## The Eval function
 * Perhaps the most important part of the entire task, we spent a lot of time on improving this
 function by trying out different parameters for an eval function or taking two different eval functions and observing battles between them and trying to look for errors in those implementations or trying to find better parameters (This might seem naïve but it’s worth mentioning since without proper observations it is not possible to obtain a good eval function and also since no deep learning methods were implemented to learn the exact eval function. Also it was essential that these observations were made for all the board configurations as well because the functions set for one board configuration wouldn’t work for the other configuration) 
-* So, in general, we had our eval function having the following considerations: 
 
+* So, in general, we had our eval function having the following considerations: 
   1. Town hall scores: For the different cases of stalemates and absolute wins as described above
   2. Army Margins: For making the player to try to kill the soldiers of the opponent and to try to save their soldiers. Kept as: Soldiers_left/3
   3. End Game Factor: A function which declines linearly as the game proceeds (As a function of the sum of the number of soldiers left for the two players) 
