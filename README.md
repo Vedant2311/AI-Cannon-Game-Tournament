@@ -170,7 +170,12 @@ Player 2 score will be: **2.09**
 # 2. Creating an AI based Cannon game player
 
 ## General Approach for the player bot
-* The player Bot is A5.cpp
+* The player Bot is A5.cpp. In order to get a runnable execution, perform the following steps
+```sh
+$ Gets a binary file by the name CustomPlayer
+./compile.sh
+```
+* The program **run.sh** simply runs the binary executable formed by the previous compile step.
 * We applied a general Mini-max algorithm with an initial depth assigned as:
     * 5 for 8*8 board
     * 4 for other configurations
