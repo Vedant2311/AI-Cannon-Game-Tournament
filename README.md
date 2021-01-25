@@ -1,4 +1,4 @@
-# Cannon
+# AI-Cannon-Game-Tournament
 Simulator supporting a user interface for Cannon, an abstract strategy board game.
 
 ## Details
